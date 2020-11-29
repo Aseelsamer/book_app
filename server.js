@@ -15,8 +15,10 @@ const PORT = process.env.PORT;
 server.use(express.static('./public'));
 server.set('view engine','ejs');
 
-server.get('/',(req,res)=>{
-  res.render('pages/index');
+server.get('/searches/new',(req,res)=>{
+  // res.render('pages/index');
+  res.render('pages/searches/new.ejs');
+
 });
 
 server.get('*', (req, res) => {
