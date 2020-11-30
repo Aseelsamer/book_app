@@ -1,0 +1,66 @@
+.radioButtons {
+    box-shadow: 0 0 15px #777777;
+    margin-bottom: 25px;
+    background-color: #d8d8d8;
+    border-radius: 5px;
+    padding: 20px 15px;
+}
+.textInputDiv input {
+    box-shadow: 0 0 7px #777777;
+    margin-bottom: 25px;
+    border: 0;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px 15px;
+}
+.submitButton {
+    text-align: center;
+    display: block;
+    border: 0;
+    cursor: pointer;
+    color: #fff;
+    padding: 20px 15px;
+    width: 100%;
+    border-radius: 5px;
+    background-color: #000;
+}
+
+/* hamburger */
+.ham {
+    position: absolute;
+    /* always keep ham on top of everything */
+    z-index: 1000;
+    top: 20px;
+    right: 20px;
+    width: 36px;
+    height: 36px;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    /* show the menu image */
+    background-image: url("https://ljc-dev.github.io/testing0/ham.svg");
+    background-size: 100%;
+  }
+.navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: black;
+    width: 100vw;
+    height: 10vh;
+    overflow: hidden;
+    color: white;
+    /* hide the menu above the screen by default */
+    transform: translateY(-100%);
+    /* transition adds a little animation when sliding in and out the menu */
+    transition: transform 0.2s ease;
+  }
+  .showNav {
+    /* show the menu */
+    transform: translateY(0);
+  }
+
+  .menulink{
+    color: white;
+  }
