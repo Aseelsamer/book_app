@@ -1,16 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="base.css">
-    <link rel="stylesheet" href="layout.css">
-    <link rel="stylesheet" href="modules.css">
-    <link rel="stylesheet" href="reset.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="../styles/base.css">
 </head>
+
 <body>
-    <h1>Hello World</h1>
-    
+  <header>
+    <%- include('../layout/nav')%>
+  </header>
+  <ul>
+    <h2> There are <%= books.length %> Books</h2>
+    <% books.forEach(data=>{ %>
+    <h3> <%= data.title %></h3>
+    <h4><%= data.author %></h4>
+    <img src=" <%= data.image_url %>" alt="">
+    <a href="/books/<%= data.id%>">view details</a>
+    <% }) %>
+  </ul>
+
+
+  <script src="js/app.js"></script>
 </body>
+
 </html>
