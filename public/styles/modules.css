@@ -1,0 +1,27 @@
+.radio {
+    box-shadow: 0 0 15px #777777;
+    margin-bottom: 25px;
+    background-color: #d8d8d8;
+    border-radius: 5px;
+    padding: 20px 15px;
+}
+.input-text input {
+    box-shadow: 0 0 7px #777777;
+    margin-bottom: 25px;
+    border: 0;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px 15px;
+}
+.submit-btn {
+    text-align: center;
+    display: block;
+    border: 0;
+    cursor: pointer;
+    color: #fff;
+    padding: 20px 15px;
+    width: 100%;
+    border-radius: 5px;
+    background-color: #000;
+}

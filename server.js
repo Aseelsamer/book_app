@@ -1,37 +1,74 @@
 'use strict';
-
-
+//Aplication Depenencies (require)
 const express = require('express');
-require('dotenv').config();
-const server = express();
-const pg = require('pg');
-const client  = new pg.Client(process.env.DATABASE_URL);
-const superagent = require('superagent');
 const cors = require('cors');
+require('dotenv').config();
+const superagent = require('superagent');
+let pg = require('pg');
+//application setup (port,server,use cors)
+const PORT = process.env.PORT || 5000;
+const server = express();
 server.use(cors());
-
-const PORT = process.env.PORT;
-
-server.use(express.static('./public'));
-server.set('view engine','ejs');
-
-server.get('/searches/new',(req,res)=>{
-  // res.render('pages/index');
-  res.render('pages/searches/new.ejs');
-
+server.use(express.static('./public'));// connect the folders on the machine (locally)
+server.set('view engine', 'ejs');// hi theeeere am using ejs !
+server.get('/', (req, res) => {
+  res.render('pages/index');
 });
-
-server.get('*', (req, res) => {
-  res.status(400).send('Not found');
+server.get('/searches/new', (req, res) => {
+  res.render('pages/searches/new');
 });
-server.use((error, req, res) => {
-  res.status(500).send('Sorry, something went wrong');
-});
-
-
-client.connect()
-  .then(() => {
-    server.listen(PORT, ()=>{
-      console.log(`Listening on port ${PORT}`);
+server.get('/sendBookInfoGet', bookHandlerFun);
+function bookHandlerFun(req, res) {
+  let searchQuery = req.query.myText;// take it from the ejs form
+  let query1 = req.query.search;// take it from the ejs form
+  console.log(query1);
+  let url = ``;
+  if (query1 == 'auther') {
+    url = `https://www.googleapis.com/books/v1/volumes?q=${searchQuery}+inauther:${searchQuery}`;
+  }
+  else if (query1 == 'title') {
+    url = `https://www.googleapis.com/books/v1/volumes?q=${searchQuery}+intitle:${searchQuery}`;
+  }
+  // for (let i = 0; i < data.body.items.length; i++) {
+  //     let newObj = new Book(data.body.items[i].volumeInfo);
+  // }
+  superagent.get(url)
+    .then(data => data.body.items.map(result => new Book(result.volumeInfo)))
+    .then(bookInfoResult => res.render('pages/searches/show', { fn: bookInfoResult }))
+    .catch(() => {
+      let error = 'you have a problem in the superagent';
+      res.render('pages/error', { er: error });
     });
-  });
+}
+Book.all = [];
+function Book(bookObj) {
+  if (bookObj.imageLinks.thumbnail) {
+    let splittedURL = bookObj.imageLinks.thumbnail.split('');
+    let arr = ['s', 'p', 't', 't', 'h'];
+    if (splittedURL[4] != 's') {
+      for (let i = 0; i < 4; i++) {
+        splittedURL.shift();
+      }
+      for (let i = 0; i < 5; i++) {
+        splittedURL.unshift(arr[i]);
+      }
+    }
+    this.img = splittedURL.join('');
+  }
+  else {
+    this.img = `https://i.imgur.com/J5LVHEL.jpg`;//ensure it is secure website
+  }
+  this.title = bookObj.title ? bookObj.title : ' There is no title for this book';
+  this.descreption = bookObj.description ? bookObj.description : 'There is no descreption';
+  // if (bookObj.authors) {
+  //     this.autherName = bookObj.authors[0];
+  // }
+  // else {
+  //     this.autherName = 'Ayther is not Known';
+  // }
+  this.autherName= bookObj.authors ? bookObj.authors[0]: 'Ayther is not Known'; // array
+  Book.all.push(this);
+}
+server.listen(PORT, () => {
+  console.log(`listining on port ${PORT}`);
+});
