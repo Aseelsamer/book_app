@@ -5,15 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>new</title>
-    <link rel="stylesheet" href="styles/layout.css">
+    <!-- <link rel="stylesheet" href="../styles/layout.css"> -->
 </head>
 
 <body>
     <form action="/sendBookInfoGet" method="get">
-        
+        <div class="input-text">
             <input type="text" name="myText">
+        </div>
+        <div class="radio">
             <label >Title</label> <input type="radio" name="search" value="title">
+        </div>
+        <div class="radio">
             <label > Auther </label><input type="radio" name="search" value="auther">
+        </div class="submit-btn">
             <button type="submit" id="sendInfo"> Search The Google Books API </button>
         
     </form>

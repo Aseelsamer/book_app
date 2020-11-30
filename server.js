@@ -5,27 +5,18 @@ const cors = require('cors');
 require('dotenv').config();
 const superagent = require('superagent');
 let pg = require('pg');
-
-
-
-
 //application setup (port,server,use cors)
 const PORT = process.env.PORT || 5000;
 const server = express();
 server.use(cors());
-
 server.use(express.static('./public'));// connect the folders on the machine (locally)
 server.set('view engine', 'ejs');// hi theeeere am using ejs !
-
 server.get('/', (req, res) => {
   res.render('pages/index');
 });
 server.get('/searches/new', (req, res) => {
   res.render('pages/searches/new');
-
 });
-
-
 server.get('/sendBookInfoGet', bookHandlerFun);
 function bookHandlerFun(req, res) {
   let searchQuery = req.query.myText;// take it from the ejs form
@@ -33,26 +24,21 @@ function bookHandlerFun(req, res) {
   console.log(query1);
   let url = ``;
   if (query1 == 'auther') {
-    url = `https://www.googleapis.com/books/v1/volumes?q=${searchQuery}+inauthor:${searchQuery}`;
+    url = `https://www.googleapis.com/books/v1/volumes?q=${searchQuery}+inauther:${searchQuery}`;
   }
   else if (query1 == 'title') {
     url = `https://www.googleapis.com/books/v1/volumes?q=${searchQuery}+intitle:${searchQuery}`;
-
   }
+  // for (let i = 0; i < data.body.items.length; i++) {
+  //     let newObj = new Book(data.body.items[i].volumeInfo);
+  // }
   superagent.get(url)
-    .then(data => {
-      for (let i = 0; i < data.body.items.length; i++) {
-        let newObj = new Book(data.body.items[i].volumeInfo);
-      }
-
-      res.render('pages/searches/show', { fn: Book.all });
-    })
-
-    .catch(()=>{
-      let error='you have a problem in the superagent';
-      res.render('pages/error',{er:error});
+    .then(data => data.body.items.map(result => new Book(result.volumeInfo)))
+    .then(bookInfoResult => res.render('pages/searches/show', { fn: bookInfoResult }))
+    .catch(() => {
+      let error = 'you have a problem in the superagent';
+      res.render('pages/error', { er: error });
     });
-
 }
 Book.all = [];
 function Book(bookObj) {
@@ -72,16 +58,17 @@ function Book(bookObj) {
   else {
     this.img = `https://i.imgur.com/J5LVHEL.jpg`;//ensure it is secure website
   }
-  this.title = bookObj.title;
-  this.descreption = bookObj.description;
-  this.autherName = bookObj.authors; // array
+  this.title = bookObj.title ? bookObj.title : ' There is no title for this book';
+  this.descreption = bookObj.description ? bookObj.description : 'There is no descreption';
+  // if (bookObj.authors) {
+  //     this.autherName = bookObj.authors[0];
+  // }
+  // else {
+  //     this.autherName = 'Ayther is not Known';
+  // }
+  this.autherName= bookObj.authors ? bookObj.authors[0]: 'Ayther is not Known'; // array
   Book.all.push(this);
 }
-
-
-
-
-
 server.listen(PORT, () => {
   console.log(`listining on port ${PORT}`);
 });

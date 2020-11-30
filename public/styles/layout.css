@@ -1,37 +1,25 @@
 
   body {
-    margin:0;
-    padding:0;
-    font-family: sans-serif;
-    background: linear-gradient(#141e30, #243b55);
-  }
-  
-   form{
-    position: relative;
-  }
-  
-  input {
-    width: 100%;
-    padding: 10px 0;
-    font-size: 16px;
-    color: #fff;
-    margin-bottom: 30px;
-    border: none;
-    border-bottom: 1px solid #fff;
-    outline: none;
-    background: transparent;
-  }
-    label {
-    position: absolute;
-    top:0;
-    left: 0;
-    padding: 10px 0;
-    font-size: 16px;
-    color: #fff;
-    pointer-events: none;
-    transition: .5s;
-  }
-  
+    min-height: 100vh;;
+}
+main{
+    max-width: 600px;
+    margin: auto;
+    padding: 35px 2em;
+}
+header nav {
+    padding: 25px 15px;
+    display: flex;
+    justify-content: space-between;
+}
+.links-block {
+    display: none;
+    padding: 0 15px;
+}
+.links-block-visible {
+    display: flex;
+    flex-direction: column;
+}
    
   
 
