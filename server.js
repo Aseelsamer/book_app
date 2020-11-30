@@ -9,6 +9,7 @@ let pg = require('pg');
 const PORT = process.env.PORT || 5000;
 const server = express();
 server.use(cors());
+
 const client = new pg.Client(process.env.DATABASE_URL);
 server.use(express.static('./public'));// connect the folders on the machine (locally)
 server.set('view engine', 'ejs');// hi theeeere am using ejs !
@@ -33,6 +34,16 @@ server.get('/error', errorHandlerFunc);
 function errorHandlerFunc(req, res) {
   res.render('pages/error');
 }
+server.use(express.static('./public'));// connect the folders on the machine (locally)
+server.set('view engine', 'ejs');// hi theeeere am using ejs !
+server.get('/', (req, res) => {
+  res.render('pages/index');
+});
+server.get('/searches/new', (req, res) => {
+  res.render('pages/searches/new');
+});
+server.get('/sendBookInfoGet', bookHandlerFun);
+
 function bookHandlerFun(req, res) {
   let searchQuery = req.query.myText;// take it from the ejs form
   let query1 = req.query.search;// take it from the ejs form
@@ -44,6 +55,7 @@ function bookHandlerFun(req, res) {
   else if (query1 == 'title') {
     url = `https://www.googleapis.com/books/v1/volumes?q=${searchQuery}+intitle:${searchQuery}`;
   }
+
   superagent.get(url)
     .then(data => data.body.items.map(result => new Book(result.volumeInfo)))
     .then(bookInfoResult => res.render('pages/searches/show', { fn: bookInfoResult }))
@@ -52,6 +64,7 @@ function bookHandlerFun(req, res) {
       res.render('pages/error', { er: error });
     });
 }
+
 // select * 
 function showaAllDetailsHandlerFun(req, res) {
   let id = req.params.id;
@@ -74,6 +87,7 @@ function addBookToDB(req, res) {
       res.redirect(`/books/${result.rows[0].id}`)
     });
 }
+
 Book.all = [];
 function Book(bookObj) {
   if (bookObj.imageLinks.thumbnail) {
@@ -84,7 +98,11 @@ function Book(bookObj) {
         splittedURL.shift();
       }
       for (let i = 0; i < 5; i++) {
+
         splittedURL.unshift(arr[i])
+
+        splittedURL.unshift(arr[i]);
+
       }
     }
     this.img = splittedURL.join('');
@@ -93,6 +111,7 @@ function Book(bookObj) {
     this.img = `https://i.imgur.com/J5LVHEL.jpg`;//ensure it is secure website
   }
   this.title = bookObj.title ? bookObj.title : ' There is no title for this book';
+
   this.description = bookObj.description ? bookObj.description : 'There is no description';
   this.autherName = bookObj.authors ? bookObj.authors[0] : 'Ayther is not Known'; // array
   this.isbn = bookObj.industryIdentifiers ? bookObj.industryIdentifiers[0].identifier : 'No isbn';
@@ -102,3 +121,18 @@ client.connect()
   .then(() => {
     server.listen(PORT, () => console.log(`Listening on port: ${PORT}`));
   })
+
+  this.descreption = bookObj.description ? bookObj.description : 'There is no descreption';
+  // if (bookObj.authors) {
+  //     this.autherName = bookObj.authors[0];
+  // }
+  // else {
+  //     this.autherName = 'Ayther is not Known';
+  // }
+  this.autherName= bookObj.authors ? bookObj.authors[0]: 'Ayther is not Known'; // array
+  Book.all.push(this);
+}
+server.listen(PORT, () => {
+  console.log(`listining on port ${PORT}`);
+});
+

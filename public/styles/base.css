@@ -1,3 +1,4 @@
+
 @import 'reset.css';
 @import 'layout.css';
 @import 'module.css';  
@@ -13,4 +14,49 @@ body {
     box-sizing: border-box;
 }
 
+<<<<<<< HEAD
+=======
+/* hamburger */
+.ham {
+    position: absolute;
+    /* always keep ham on top of everything */
+    z-index: 1000;
+    top: 20px;
+    right: 20px;
+    width: 36px;
+    height: 36px;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    /* show the menu image */
+    background-image: url("https://ljc-dev.github.io/testing0/ham.svg");
+    background-size: 100%;
+  }
+.navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: black;
+    width: 100vw;
+    height: 20vh;
+    overflow: hidden;
+    color: white;
+    /* hide the menu above the screen by default */
+    transform: translateY(-100%);
+    /* transition adds a little animation when sliding in and out the menu */
+    transition: transform 0.2s ease;
+  }
+  .showNav {
+    /* show the menu */
+    transform: translateY(0);
+  }
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    background-color: gray;
+}
+>>>>>>> 4ea195631e5fd3a46c9497d2d295943f4f9b91c9
 
