@@ -4,6 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>new search</title>
+    <link rel="stylesheet" href="../styles/styles.css">
+</head>
+<body>
+    
+    <h1 class="test">Search For A Book</h1>
+    <div class="form">
+        <form action="/sendBookInfoGet" method="get">
+            <div class="textInputDiv"> <input class="textInput" type="text" placeholder='Search by name' name="myText"></div>
+            <div class="radioButtons"> <label class="title">Title</label> <input type="radio" name="search"
+                    value="title">
+                <label class="auther"> Auther </label><input type="radio" name="search" value="auther">
+            </div>
+            <div class="btn"><button class="submitButton" type="submit" id="sendInfo"> Search The Google Books API
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>new</title>
     <!-- <link rel="stylesheet" href="../styles/layout.css"> -->
 </head>
@@ -25,3 +50,4 @@
 </body>
 
 </html>
+
