@@ -1,0 +1,26 @@
+
+  body {
+    min-height: 100vh;;
+}
+main{
+    max-width: 600px;
+    margin: auto;
+    padding: 35px 2em;
+}
+header nav {
+    padding: 25px 15px;
+    display: flex;
+    justify-content: space-between;
+}
+.links-block {
+    display: none;
+    padding: 0 15px;
+}
+.links-block-visible {
+    display: flex;
+    flex-direction: column;
+}
+   
+  
+
+  

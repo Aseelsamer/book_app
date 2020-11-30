@@ -1,3 +1,4 @@
+
 @import 'reset.css';
 @import 'layout.css';
 @import 'module.css';  
@@ -74,3 +75,12 @@ header nav {
     /* show the menu */
     transform: translateY(0);
   }
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    background-color: gray;
+}
+
