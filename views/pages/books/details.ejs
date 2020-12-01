@@ -15,16 +15,16 @@
     </header>
     <div class="loops">
         <div class="loopContent">
-            <h2> There are <%= books.length %> Books</h2>
-            <h4>title: <%= books.title %></h4>
-            <p>author: <%= books.author %></p>
-            <img src="<%= books.image_url %>">
-            <p>isbn: <%= books.isbn %></p>
-            <p>description: <%= books.description %></p>
+            <h2> There are <%= books.length %> Books</h2><br>
+            <h4>Title: <%= books.title %></h4><br>
+            <p>Author: <%= books.author %></p><br>
+            <img src="<%= books.image_url %>"><br>
+            <p>ISBN: <%= books.isbn %></p><br>
+            <p>Description: <%= books.description %></p><br>
 ​
-            <button id='showUpdateForm'>Update Book</button>
-            <form action="/deleteBook/<%=books.id%>?_method=delete" method="post">
-            <button id='deleteBook'>delete Book</button>
+            <button id='showUpdateForm'>Update Book</button><br>
+            <form action="/deleteBook/<%=books.id%>?_method=delete" method="post"><br>
+            <button id='deleteBook'>Delete Book</button><br>
         </form>
 ​
         </div>
