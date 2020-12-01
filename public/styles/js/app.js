@@ -17,7 +17,7 @@ menuLinks.forEach(
 );
 
 
-$('#updataForm').hide();
-$('#showUpdateForm').on('click', function () {
-  $('#updataForm').toggle();
+$('#updateForm').hide();
+$('#updateBtn').on('click', function () {
+  $('#updateForm').toggle();
 });

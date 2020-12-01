@@ -1,50 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+​
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Show</title>
-
     <link rel="stylesheet" href="../styles/base.css">
 </head>
+
 <body>
-      
-        <header>
-          <%- include('../../layout/nav')%>
-        </header>
-    
+    <header>
+        <%- include('../../layout/nav') %>
+    </header>
+    ​
     <div class="loops">
+        ​
         <% for(let i=0;i<fn.length;i++){ %>
+
+
         <div class="loopContent">
-            <form method="GET" action="/addChosenBook")>
-            <input type="hidden" name="title" value=<%= fn[i].title %>>
-            <h1><%= fn[i].title %></h1>
-            <input type="hidden" name="author" value="<%= fn[i].autherName %>">
-            <h3><%= fn[i].autherName %></h3>
-            <input type="hidden" name="image_url" value="<%= fn[i].img %>>">
-            <img src="<%= fn[i].img %>" alt="" srcset="">
-            <input type="hidden" name="isbn" value="<%= fn[i].isbn %>">
-            <h3><%= fn[i].isbn %></h3>
-            <input type="hidden" name="description" value="<%= fn[i].description %>">
-            <p><%=  fn[i].description %></p>
-            <button type="submit">ADD to my wish list</button>
+            <form method="GET" action="/addChosenBook" )>
+                <input type="hidden" name="title" value=<%= fn[i].title %>>
+                <h1><%= fn[i].title %></h1>
+                <input type="hidden" name="author" value="<%= fn[i].autherName %>">
+                <h3><%= fn[i].autherName %></h3>
+                <input type="hidden" name="image_url" value="<%= fn[i].img %>>">
+                <img src="<%= fn[i].img %>" alt="" srcset="">
+                <input type="hidden" name="isbn" value="<%= fn[i].isbn %>">
+                <h3><%= fn[i].isbn %></h3>
+                <input type="hidden" name="description" value="<%= fn[i].description %>">
+                <p><%=  fn[i].description %></p>
+                <button type="submit">ADD to my wish list</button>
             </form>
         </div>
         <% } %>
+ 
         </form>
+
+        ​
     </div>
-
-</head>
-<body>
-    <% for(let i=0;i<fn.length;i++){ %>
-    <h1><%= fn[i].title %></h1>
-    <h3><%= fn[i].autherName %></h3>
-    <p><%=  fn[i].descreption %></p>
-    <img src="<%= fn[i].img %>" alt="" srcset="">
-    <% } %>
-
-
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    ​  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="js/app.js"></script>
 </body>
-</html>
+​
