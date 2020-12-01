@@ -6,12 +6,11 @@ require('dotenv').config();
 const superagent = require('superagent');
 let pg = require('pg');
 //application setup (port,server,use cors)
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 7000;
 const server = express();
 server.use(cors());
-
-const client = new pg.Client(process.env.DATABASE_URL);
 server.use(express.static('./public'));// connect the folders on the machine (locally)
+const client = new pg.Client(process.env.DATABASE_URL);
 server.set('view engine', 'ejs');// hi theeeere am using ejs !
 
 //routes
@@ -19,30 +18,29 @@ server.get('/', (req, res) => {
   let SQL = `SELECT * FROM books;`;
   client.query(SQL)
     .then(result => {
-      console.log(result.rows)
+      console.log(result.rows);
       res.render('pages/index', { books: result.rows });
     });
-})
+});
 server.get('/books/:id', showaAllDetailsHandlerFun);
 server.get('/searches/new', (req, res) => {
   res.render('pages/searches/new');
-})
+});
 server.get('/addChosenBook', addBookToDB);
 server.get('/sendBookInfoGet', bookHandlerFun);
 server.get('/error', errorHandlerFunc);
-
-function errorHandlerFunc(req, res) {
-  res.render('pages/error');
-}
-server.use(express.static('./public'));// connect the folders on the machine (locally)
-server.set('view engine', 'ejs');// hi theeeere am using ejs !
 server.get('/', (req, res) => {
   res.render('pages/index');
 });
 server.get('/searches/new', (req, res) => {
   res.render('pages/searches/new');
 });
-server.get('/sendBookInfoGet', bookHandlerFun);
+
+
+//error function
+function errorHandlerFunc(req, res) {
+  res.render('pages/error');
+}
 
 function bookHandlerFun(req, res) {
   let searchQuery = req.query.myText;// take it from the ejs form
@@ -68,7 +66,7 @@ function bookHandlerFun(req, res) {
 // select * 
 function showaAllDetailsHandlerFun(req, res) {
   let id = req.params.id;
-  console.log(req.params.id)
+  console.log(req.params.id);
   let SQL = `SELECT * FROM books WHERE id=$1`;
   let values = [id];
   client.query(SQL, values)
@@ -84,10 +82,11 @@ function addBookToDB(req, res) {
   client.query(insertQuery, values)
     .then(result => {
       console.log(result.rows[0].id);
-      res.redirect(`/books/${result.rows[0].id}`)
+      res.redirect(`/books/${result.rows[0].id}`);
     });
 }
 
+//constructor
 Book.all = [];
 function Book(bookObj) {
   if (bookObj.imageLinks.thumbnail) {
@@ -111,28 +110,15 @@ function Book(bookObj) {
     this.img = `https://i.imgur.com/J5LVHEL.jpg`;//ensure it is secure website
   }
   this.title = bookObj.title ? bookObj.title : ' There is no title for this book';
-
-  this.description = bookObj.description ? bookObj.description : 'There is no description';
-  this.autherName = bookObj.authors ? bookObj.authors[0] : 'Ayther is not Known'; // array
-  this.isbn = bookObj.industryIdentifiers ? bookObj.industryIdentifiers[0].identifier : 'No isbn';
+  this.descreption = bookObj.description ? bookObj.description : 'There is no descreption';
+  this.autherName= bookObj.authors ? bookObj.authors[0]: 'Auther is not Known'; // array
   Book.all.push(this);
 }
+
+//listening 
 client.connect()
   .then(() => {
     server.listen(PORT, () => console.log(`Listening on port: ${PORT}`));
-  })
+  });
 
-  this.descreption = bookObj.description ? bookObj.description : 'There is no descreption';
-  // if (bookObj.authors) {
-  //     this.autherName = bookObj.authors[0];
-  // }
-  // else {
-  //     this.autherName = 'Ayther is not Known';
-  // }
-  this.autherName= bookObj.authors ? bookObj.authors[0]: 'Ayther is not Known'; // array
-  Book.all.push(this);
-}
-server.listen(PORT, () => {
-  console.log(`listining on port ${PORT}`);
-});
 

@@ -7,6 +7,8 @@
 body {
     background-color: #9b9b9b;
     font-family: 'Roboto', sans-serif;
+    margin-top: 100px;
+    margin-left: 100px;
 
 }
 
@@ -14,8 +16,6 @@ body {
     box-sizing: border-box;
 }
 
-<<<<<<< HEAD
-=======
 /* hamburger */
 .ham {
     position: absolute;
@@ -58,5 +58,4 @@ body {
 body{
     background-color: gray;
 }
->>>>>>> 4ea195631e5fd3a46c9497d2d295943f4f9b91c9
 
