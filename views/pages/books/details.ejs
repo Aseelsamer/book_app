@@ -1,9 +1,24 @@
-
-<section>
-    <h2> There are <%= books.length %> Books</h2>
-    <h4>title: <%= books.title %></h4>
-    <p>author: <%= books.author %></p>
-    <img src="<%= books.image_url %>">
-    <p>isbn: <%= books.isbn %></p>
-    <p>description: <%= books.description %></p>
-</section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../styles/base.css">
+</head>
+<body>  
+        <header>
+          <%- include('../../layout/nav')%>
+        </header>
+    <section>
+        <h2> There are <%= books.length %> Books</h2>
+        <h4>title: <%= books.title %></h4>
+        <p>author: <%= books.author %></p>
+        <img src="<%= books.image_url %>">
+        <p>isbn: <%= books.isbn %></p>
+        <p>description: <%= books.description %></p>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
