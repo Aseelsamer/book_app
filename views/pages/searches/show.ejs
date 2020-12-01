@@ -28,10 +28,10 @@
                 <input type="hidden" name="image_url" value="<%= fn[i].img %>>">
                 <img src="<%= fn[i].img %>" alt="" srcset="">
                 <input type="hidden" name="isbn" value="<%= fn[i].isbn %>">
-                <h3><%= fn[i].isbn %></h3>
+                <h4><%= fn[i].isbn %></h3>
                 <input type="hidden" name="description" value="<%= fn[i].description %>">
                 <p><%=  fn[i].description %></p>
-                <button type="submit">ADD to my wish list</button>
+                <button id="Addto" type="submit">Add To My Wish List</button>
             </form>
         </div>
         <% } %>

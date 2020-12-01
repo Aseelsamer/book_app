@@ -1,7 +1,8 @@
-<<<<<<< HEAD
-@media only screen and (max-width: 600px) {
+@media only screen and (min-width: 100px) {
     body {
       background-color: #9b9b9b;
+      text-align: center;
+      font-family: 'Roboto', sans-serif;
     }
 
     header nav h1{
@@ -13,7 +14,6 @@
     }
     
   }
-=======
 
   body {
     min-height: 100vh;;
@@ -40,4 +40,3 @@ header nav {
   
 
   
->>>>>>> 4ea195631e5fd3a46c9497d2d295943f4f9b91c9
