@@ -1,24 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+​
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../styles/base.css">
+​
 </head>
-<body>  
-        <header>
-          <%- include('../../layout/nav')%>
-        </header>
-    <section>
-        <h2> There are <%= books.length %> Books</h2>
-        <h4>title: <%= books.title %></h4>
-        <p>author: <%= books.author %></p>
-        <img src="<%= books.image_url %>">
-        <p>isbn: <%= books.isbn %></p>
-        <p>description: <%= books.description %></p>
-    </section>
+​
+<body class="bodyClass">
+    <header>
+        <%- include('../../layout/nav') %>
+    </header>
+    <div class="loops">
+        <div class="loopContent">
+            <h2> There are <%= books.length %> Books</h2>
+            <h4>title: <%= books.title %></h4>
+            <p>author: <%= books.author %></p>
+            <img src="<%= books.image_url %>">
+            <p>isbn: <%= books.isbn %></p>
+            <p>description: <%= books.description %></p>
+​
+            <button id='showUpdateForm'>Update Book</button>
+            <form action="/deleteBook/<%=books.id%>?_method=delete" method="post">
+            <button id='deleteBook'>delete Book</button>
+        </form>
+​
+        </div>
+    </div>   
+    
+    <!-- we add the type of the CRUD either put -->
+    <form  action="/UpadateBookInfo/<%=books.id%>?_method=put" method="post" id="updataForm">
+        <input type="text" name="title" value=<%= books.title %>>
+        <input type="text" name="author" value="<%= books.author %>">
+        <input type="text" name="image_url" value="<%= books.image_url %>">
+        <input type="text" name="isbn" value="<%= books.isbn %>">
+        <textarea name="description" cols="30" rows="10"> <%= books.description %> </textarea>
+        <button type="submit">Update My data</button>
+    </form>
+​
+​
+​
+​
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="js/app.js"></script>
+    <script src="/js/app.js"></script>
 </body>
+​
 </html>
